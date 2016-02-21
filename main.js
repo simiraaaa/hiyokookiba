@@ -2,22 +2,22 @@
 
 phina.define('MyAssetLoader', {
   _static: {
-    
+
     order: [
-      'image','ss','ssjson','se','bgm'
+      'image', 'ss', 'ssjson', 'se', 'bgm'
     ],
-    
+
     toName: {
-      ss: 'ƒXƒvƒ‰ƒCƒgƒV[ƒg',
-      image: '‰æ‘œ',
-      ssjson: 'ƒXƒvƒ‰ƒCƒgƒV[ƒg—p‚ÌƒAƒjƒ[ƒVƒ‡ƒ“’è‹`ƒtƒ@ƒCƒ‹(json)',
-      se: 'Œø‰Ê‰¹',
+      ss: 'ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚·ãƒ¼ãƒˆ',
+      image: 'ç”»åƒ',
+      ssjson: 'ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚·ãƒ¼ãƒˆç”¨ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³å®šç¾©ãƒ•ã‚¡ã‚¤ãƒ«(json)',
+      se: 'åŠ¹æœéŸ³',
       bgm: 'BGM',
-      
+
     },
     BASE: "https://raw.githubusercontent.com/simiraaaa/hiyokookiba/master/",
     assets: {
-      
+
     },
     loadAssets: function (f) {
       var assets = this.assets;
@@ -47,30 +47,72 @@ phina.define('MyAssetLoader', {
     },
     addMenu: function () {
       var dom = DOMManager.SINGLETON;
+
       var menu = dom.getMenuParent();
+      var order = this.order;
+      var toName = this.toName;
+      var menus = [];
+      menu.innerHTML = '';
+      var self = this;
+      order.forEach(function (e) {
+        var tag = document.createElement('button');
+        tag.textContent = toName[e];
+        tag.onclick = function () {
+          self.addContent(e);
+        };
+      });
 
     },
+
+    addContent: function (type) {
+      var assets = this.loadedAssets[type];
+      var content = dom.SINGLETON.getContentParent;
+      assets.forEach(function (e) {
+        content.appendChild(e);
+      });
+    },
+
+    loadedAssets: {
+      image: [],
+      ss: [],
+      ssjson: [],
+      se: [],
+      bgm: [],
+    },
     loaderMap: {
-      image: function (value) {
+      image: function (value, f) {
+      },
+
+      ss: function (value, f) {
+
+        var tag = document.createElement('div');
+        var name = document.createElement('a');
+        name.href = value.src;
+        tag.appendChild(name).textContent = value.name;
+        tag.appendChild(document.createElement('div')).textContent = value.desc;
+        var asset = document.createElement('div');
+        var a = name.cloneNode();
+        var img = document.createElement('img');
+        img.src = value.src;
+        a.appendChild(img);
+        asset.appendChild(a);
+        tag.appendChild(asset);
+        this.loadedAssets.image.push(tag);
+        f && f();
 
       },
 
-      ss: function (value) {
+      ssjson: function (value, f) {
 
 
       },
 
-      ssjson: function (value) {
+      se: function (value, f) {
 
 
       },
 
-      se: function (value) {
-
-
-      },
-
-      bgm: function (value) {
+      bgm: function (value, f) {
 
 
       },
@@ -93,7 +135,7 @@ phina.define('MyAssetLoader', {
       ss: SS,
       se: SE,
       bgm: BGM,
-      ssjson:SSJSON,
+      ssjson: SSJSON,
     }
 
     var _a = {
@@ -102,20 +144,20 @@ phina.define('MyAssetLoader', {
       ],
       ss: [
         {
-          name: 'ƒgƒ}ƒsƒRss',
+          name: 'ãƒˆãƒãƒ”ã‚³ss',
           src: 'tomapiko_ss.png',
-          desc: 'ƒgƒ}ƒg‚Ì‚Ğ‚æ‚±ƒIƒXA1ƒhƒbƒg1pxƒo[ƒWƒ‡ƒ“'
+          desc: 'ãƒˆãƒãƒˆã®ã²ã‚ˆã“ã‚ªã‚¹ã€1ãƒ‰ãƒƒãƒˆ1pxãƒãƒ¼ã‚¸ãƒ§ãƒ³'
         },
         {
-          name: 'ƒ~ƒJ‚¿‚á‚ñss',
+          name: 'ãƒŸã‚«ã¡ã‚ƒã‚“ss',
           src: 'mikachan_ss.png',
-          desc: '‚İ‚©‚ñ‚Ì‚Ğ‚æ‚±ƒƒXA1ƒhƒbƒg1pxƒo[ƒWƒ‡ƒ“'
+          desc: 'ã¿ã‹ã‚“ã®ã²ã‚ˆã“ãƒ¡ã‚¹ã€1ãƒ‰ãƒƒãƒˆ1pxãƒãƒ¼ã‚¸ãƒ§ãƒ³'
         },
 
         {
-          name: 'ƒ~ƒJ‚¿‚á‚ñss',
+          name: 'ãƒŸã‚«ã¡ã‚ƒã‚“ss',
           src: 'mikachan_ss_2x.png',
-          desc: '‚İ‚©‚ñ‚Ì‚Ğ‚æ‚±ƒƒXA1ƒhƒbƒg2pxƒo[ƒWƒ‡ƒ“'
+          desc: 'ã¿ã‹ã‚“ã®ã²ã‚ˆã“ãƒ¡ã‚¹ã€1ãƒ‰ãƒƒãƒˆ2pxãƒãƒ¼ã‚¸ãƒ§ãƒ³'
         },
       ],
       ssjson: [
@@ -148,10 +190,17 @@ phina.define('MyAssetLoader', {
       this.superInit();
 
     },
-    
+
     getMenuParent: function () {
-      return document.body;
-    }
+      return document.getElementById('menu');
+    },
+    getContentParent: function () {
+      return document.getElementById('content');
+    },
+
+    _defined: function () {
+      this.SINGLETON = this();
+    },
   });
 
 }();
@@ -169,7 +218,7 @@ phina.define('PageManager', {
         }
       ]
     });
-  }
+  },
 });
 
 phina.define('StartScene', {
@@ -177,12 +226,12 @@ phina.define('StartScene', {
 
   init: function () {
     this.superInit();
+    document.body.appendChild(document.createElement('div')).id = 'menu';
+    document.body.appendChild(document.createElement('div')).id = 'content';
+
     MyAssetLoader.loadAssets(function () {
       MyAssetLoader.addMenu();
     });
-  },
-  _defined: function () {
-    this.SINGLETON = this();
   }
 });
 
@@ -194,4 +243,6 @@ phina.main(function () {
   });
 
   app.run();
+
+  app.replaceScene(PageManager());
 });
