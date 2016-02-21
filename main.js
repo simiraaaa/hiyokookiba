@@ -57,8 +57,9 @@ phina.define('MyAssetLoader', {
       order.forEach(function (e) {
         var tag = document.createElement('button');
         tag.textContent = toName[e];
+        self.addContent(e);
         tag.onclick = function () {
-          self.addContent(e);
+          location.hash = e;
         };
       });
 
@@ -67,9 +68,13 @@ phina.define('MyAssetLoader', {
     addContent: function (type) {
       var assets = this.loadedAssets[type];
       var content = dom.SINGLETON.getContentParent;
+      var typeDiv = document.createElement('div');
+      typeDiv.id = type;
+      typeDiv.appendChild(document.createElement('h1')).textContent = this.toName[type];
       assets.forEach(function (e) {
-        content.appendChild(e);
+        typeDiv.appendChild(e);
       });
+      content.appendChild(typeDiv);
     },
 
     loadedAssets: {
@@ -122,9 +127,9 @@ phina.define('MyAssetLoader', {
 
     var BASE = this.BASE;
 
-    var IMAGE = 'image/';
+    var IMAGE = 'images/';
     var SS = IMAGE + 'ss/';
-    var SOUND = 'sound/';
+    var SOUND = 'sounds/';
     var SE = SOUND + 'se/';
     var BGM = SOUND + 'bgm/';
 
@@ -226,7 +231,10 @@ phina.define('StartScene', {
 
   init: function () {
     this.superInit();
-    document.body.appendChild(document.createElement('div')).id = 'menu';
+    var menu = document.createElement('div')
+    menu.className = 'menu';
+    document.body.appendChild(menu).id = 'menu';
+    document.body.appendChild(document.createElement('div')).className = 'dummy';
     document.body.appendChild(document.createElement('div')).id = 'content';
 
     MyAssetLoader.loadAssets(function () {
