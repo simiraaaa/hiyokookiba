@@ -61,6 +61,7 @@ phina.define('MyAssetLoader', {
         tag.onclick = function () {
           location.hash = e;
         };
+        menu.appendChild(tag);
       });
 
     },
@@ -161,7 +162,7 @@ phina.define('MyAssetLoader', {
         },
 
         {
-          name: 'ミカちゃんss',
+          name: 'ミカちゃんss_x2',
           src: 'mikachan_ss_2x.png',
           desc: 'みかんのひよこメス、1ドット2pxバージョン'
         },
