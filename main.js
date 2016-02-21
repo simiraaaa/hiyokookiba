@@ -16,6 +16,7 @@ phina.define('MyAssetLoader', {
 
     },
     BASE: "https://raw.githubusercontent.com/simiraaaa/hiyokookiba/master/",
+    DOWNLOAD_ALL:"https://github.com/simiraaaa/hiyokookiba/archive/master.zip",
     assets: {
 
     },
@@ -52,6 +53,11 @@ phina.define('MyAssetLoader', {
       var order = this.order;
       var toName = this.toName;
       menu.innerHTML = '';
+
+      var a = document.createElement('a');
+      a.href = this.DOWNLOAD_ALL;
+      a.textContent = '全てダウンロード';
+      menu.appendChild(a);
       var self = this;
       order.forEach(function (e) {
         var tag = document.createElement('button');
