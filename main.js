@@ -51,7 +51,6 @@ phina.define('MyAssetLoader', {
       var menu = dom.getMenuParent();
       var order = this.order;
       var toName = this.toName;
-      var menus = [];
       menu.innerHTML = '';
       var self = this;
       order.forEach(function (e) {
@@ -240,7 +239,7 @@ phina.define('StartScene', {
     document.body.appendChild(document.createElement('div')).id = 'content';
 
     MyAssetLoader.loadAssets(function () {
-      MyAssetLoader.addMenu();
+      setTimeout(function () { MyAssetLoader.addMenu(); }, 10);
     });
   }
 });
