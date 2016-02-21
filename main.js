@@ -104,7 +104,7 @@ phina.define('MyAssetLoader', {
         a.appendChild(img);
         asset.appendChild(a);
         tag.appendChild(asset);
-        this.loadedAssets.image.push(tag);
+        this.loadedAssets.ss.push(tag);
         f && f();
 
       },
