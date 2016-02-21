@@ -66,6 +66,7 @@ phina.define('MyAssetLoader', {
     },
 
     addContent: function (type) {
+      var dom = DOMManager.SINGLETON;
       var assets = this.loadedAssets[type];
       var content = dom.SINGLETON.getContentParent;
       var typeDiv = document.createElement('div');
