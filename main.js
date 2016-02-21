@@ -170,9 +170,9 @@ phina.define('MyAssetLoader', {
 
       ],
     }
-
+    
     _a.forIn(function (k, v) {
-      v.src = paths[k] + v.src;
+      v.src =BASE+ paths[k] + v.src;
     });
 
     this.assets = _a;
